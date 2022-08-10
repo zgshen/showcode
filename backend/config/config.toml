@@ -9,4 +9,7 @@ log_level = "DEBUG"
 name = "showcode"
 
 [server]
-port = 8080
+port = ":8080"
+
+[database]
+path = "config/data.db"

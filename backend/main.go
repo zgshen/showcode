@@ -1,13 +1,11 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
-	"showcode/app/model"
+	"showcode/app"
 )
 
 func main() {
-	u := model.User{
+	/*u := model.User{
 		UserId:   1,
 		Username: "Akari",
 		City:     "Guangzhou",
@@ -15,7 +13,7 @@ func main() {
 	}
 
 	j, _ := json.Marshal(u)
-	fmt.Println(string(j))
+	fmt.Println(string(j))*/
 
-	//app.Run()
+	app.Run()
 }
