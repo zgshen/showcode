@@ -1,9 +1,5 @@
 package model
 
-import (
-	"showcode/config"
-)
-
 type (
 	User struct {
 		Model
@@ -11,8 +7,6 @@ type (
 		Password string `json:"password"`
 	}
 )
-
-var db = config.DBConn
 
 func (User) TableName() string {
 	return "sc_user"

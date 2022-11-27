@@ -1,35 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Routes, Route, NavLink} from "react-router-dom";
 import './index.css';
-import ListComponent from "./components/List";
-
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {Detail} from "./components/Detail";
+import {AuthProvider, useAuth} from "./components/Auth";
+import {Login} from "./components/Login";
+import {RequireAuth} from "./components/RequireAuth";
 
 ReactDOM.render(
     <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/app" element={<App />} />
-        </Routes>
+        <AuthProvider>
+            <Routes>
+                <Route path="/" element={<Index/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/app" element={<App/>}/>
+                <Route path="/detail" element={<RequireAuth><Detail/></RequireAuth>}/>  
+            </Routes>
+        </AuthProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );
 
 function Index() {
-    
-    return(
+    const auth = useAuth()
+    return (
         <div>
-            Hello world!
+            Hello world...
             <br/>
-            <div>
-                <ListComponent />
-            </div>
+            <br/>
+            <NavLink to={'/detail'}>detail</NavLink>
+
+            <br/>
+            <br/>
+            {!auth.user && (
+                <NavLink to={'/login'}>Login</NavLink>
+            )}
         </div>
     );
 }
 
 function App() {
-    return(
+    return (
         <div>
             Application.
         </div>

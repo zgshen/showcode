@@ -4,17 +4,38 @@ import (
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"showcode/app/model"
+	"showcode/app/service"
 )
 
 func codeHandle(e *echo.Echo) {
 	e.GET("/api/list", getList)
+	e.POST("api/add", addCode)
 }
 
 func getList(c echo.Context) error {
-	//str := "[{\"content\":\"Hello world.\",\"tag\":\"text,first\"},{\"content\":\"Today is holiday.\",\"tag\":\"holiday\"}]"
-	//m := model.Model{1, 1669197844491, 1669197844491}
-	c1 := model.Code{model.Model{1, 1669197844491, 1669197844491}, "Hello world.", "text,first"}
-	c2 := model.Code{model.Model{2, 1669197844491, 1669197844491}, "Today is holiday.", "holiday"}
-	arr := [2]model.Code{c1, c2}
+	code1 := model.Code{
+		Model: model.Model{
+			ID:        1,
+			CreatedAt: 1669197844491,
+			UpdatedAt: 1669197844491},
+		Content: "Hello world.",
+		Tag:     "text,first"}
+	code2 := model.Code{
+		Model: model.Model{
+			ID:        2,
+			CreatedAt: 1669197844491,
+			UpdatedAt: 1669197844491},
+		Content: "Today is holiday.",
+		Tag:     "holiday"}
+	arr := [2]model.Code{code1, code2}
 	return c.JSON(http.StatusOK, arr)
+}
+
+func addCode(c echo.Context) (err error) {
+	m := new(model.Code)
+	if err = c.Bind(m); err != nil {
+		return err
+	}
+	service.AddCode(m)
+	return c.JSON(http.StatusOK, m)
 }
