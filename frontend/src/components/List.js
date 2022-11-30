@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Get} from "../services/Service";
 import {Navigation} from "./Navigation";
+import {useNavigate} from "react-router-dom";
 
 export function List() {
 
     const [result, setResult] = useState([])
+    const navigate = useNavigate();
     
     useEffect(() => {
         Get("list").then((response) => {
@@ -20,12 +22,17 @@ export function List() {
                         hour: '2-digit', 
                         minute: '2-digit', 
                         second: '2-digit' })
-                    .format(item.created_at)
+                    .format(item.created_at*1000)
             }));
 
             setResult(dto)
         })
     }, [])
+    
+    const handleDetail = (e, id) => {
+        console.log(id)
+        navigate('/detail?id='+id)
+    }
     
     return (
             <div>
@@ -38,9 +45,11 @@ export function List() {
                             {
                                 result.map((res) => {
                                     return (
-                                        <div className="mb-8 sm:break-inside-avoid">
+                                        <div className="mb-8 sm:break-inside-avoid"
+                                             onClick={(e) => {handleDetail(e, res.id)}}
+                                        >
                                             <blockquote className="rounded-xl bg-gray-50 p-6 shadow">
-                                                <p className="leading-relaxed text-gray-700">
+                                                <p className="leading-relaxed font-bold">
                                                     {res.title}
                                                 </p>
                                                 <p className="leading-relaxed text-gray-700">
@@ -65,21 +74,3 @@ export function List() {
             </div>
     )
 } 
-
-/*
-<div>
-{
-    result.map((res) => {
-        return (
-            <div id={res.id}>
-                <br/>
-                <div>{res.title}</div>
-                <div>{res.tag}</div>
-                <br/>
-            </div>
-        )
-    })
-}
-</div>
-1669791130
- */

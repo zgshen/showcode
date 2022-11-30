@@ -3,7 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 
 export function Detail() {
 
-    const auth = AuthProvider()//useAuth()
+    const auth = AuthProvider()
     const navigate = useNavigate()
 
     const handleLogout = () => {
