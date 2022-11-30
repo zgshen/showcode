@@ -3,6 +3,7 @@ package model
 type (
 	Code struct {
 		Model
+		Title   string `json:"title"`
 		Content string `json:"content"`
 		Tag     string `json:"tag"`
 	}

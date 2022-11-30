@@ -1,9 +1,9 @@
-import {useAuth} from "./Auth";
-import {useNavigate} from "react-router-dom";
+import {AuthProvider} from "./Auth";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export function Detail() {
 
-    const auth = useAuth()
+    const auth = AuthProvider()//useAuth()
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -13,10 +13,14 @@ export function Detail() {
 
     return (
         <div>
-            Detail page, welcome {auth.user}
+            Detail page, welcome {auth.getUser()}
             <br/>
             <br/>
             <button onClick={handleLogout}>Logout</button>
+
+            <br/>
+            <br/>
+            <NavLink to={'/'}>index</NavLink>
         </div>
     )
 }

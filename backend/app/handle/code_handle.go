@@ -13,21 +13,7 @@ func codeHandle(e *echo.Echo) {
 }
 
 func getList(c echo.Context) error {
-	code1 := model.Code{
-		Model: model.Model{
-			ID:        1,
-			CreatedAt: 1669197844491,
-			UpdatedAt: 1669197844491},
-		Content: "Hello world.",
-		Tag:     "text,first"}
-	code2 := model.Code{
-		Model: model.Model{
-			ID:        2,
-			CreatedAt: 1669197844491,
-			UpdatedAt: 1669197844491},
-		Content: "Today is holiday.",
-		Tag:     "holiday"}
-	arr := [2]model.Code{code1, code2}
+	arr := service.GetCodeList()
 	return c.JSON(http.StatusOK, arr)
 }
 

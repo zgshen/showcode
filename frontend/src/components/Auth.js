@@ -1,32 +1,24 @@
-import {createContext, useContext, useState} from "react";
-
-const AuthContext = createContext(null);
-
 /**
  * 权限认证
  */
-export function AuthProvider({children}) {
-
-    const [user, setUser] = useState(null);
-
+export const AuthProvider = () => {
+    
     // http request，调用后端登录
     const login = (user) => {
-        setUser(user)
+        localStorage.setItem("user", JSON.stringify(user))
     }
 
     // 登出
     const logout = () => {
-        setUser(null)
+        localStorage.setItem("user", null)
+    }
+    
+    const getUser = () => {
+        let user = localStorage.getItem("user");
+        return JSON.parse(user)
     }
 
     return (
-        // 上下文用户、登录函数和登出函数
-        <AuthContext.Provider value={{user, login, logout}}>
-            {children}
-        </AuthContext.Provider>
+        {login, logout, getUser}
     )
-}
-
-export function useAuth() {
-    return useContext(AuthContext)
 }
