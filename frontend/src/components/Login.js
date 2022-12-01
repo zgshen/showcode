@@ -1,18 +1,42 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {AuthProvider} from "./Auth";
+import {PostData, PostLogin} from "../services/Service";
 
 export const Login = () => {
-    const [user, setUser] = useState('');
     const auth = AuthProvider()
     const navigate = useNavigate()
     const location = useLocation()
     // 登录重定向原来链接，没有的话跳到首页
     const redirectPath = location.state?.path || '/'
     
-    const handleLogin = () => {
-        auth.login(user)
-        navigate(redirectPath, {replace: true})
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const user = form2kv(e.target)
+        if (!user.username || !user.password) {
+            return alert('input require values.')
+        }
+        PostLogin(user).then((response) => {
+            console.log(response)
+            if (response.status === 200) {
+                auth.login(user)
+                navigate(redirectPath, {replace: true})
+            } else {
+                alert(response.statusText)
+                return
+            }
+        }).catch(err => {
+            alert(err)
+        })
+    }
+
+    const form2kv = (form) => {
+        const fd = new FormData(form);
+        const ret = {};
+        for (let key of fd.keys()) {
+            ret[key] = fd.get(key);
+        }
+        return ret;
     }
     
     return (
@@ -25,7 +49,7 @@ export const Login = () => {
                 </p>
             </div>
 
-            <form action="" className="mx-auto mt-8 mb-0 max-w-md space-y-4">
+            <form onSubmit={handleLogin} className="mx-auto mt-8 mb-0 max-w-md space-y-4">
                 <div>
                     <label htmlFor="username" className="sr-only">Username</label>
 
@@ -34,7 +58,7 @@ export const Login = () => {
                             type="text"
                             className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                             placeholder="Enter username"
-                            onChange={(e) => setUser(e.target.value)}
+                            name="username"
                         />
 
                         <span className="absolute inset-y-0 right-4 inline-flex items-center">
@@ -63,6 +87,7 @@ export const Login = () => {
                             type="password"
                             className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
                             placeholder="Enter password"
+                            name="password"
                         />
 
                         <span className="absolute inset-y-0 right-4 inline-flex items-center">
@@ -94,7 +119,6 @@ export const Login = () => {
                     <button
                         type="submit"
                         className="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-                        onClick={handleLogin}
                     >
                         Login
                     </button>

@@ -1,22 +1,24 @@
 import axios from "axios";
 
-const urls = {
-    login: "/login", 
-    logout: "/logout", 
-    list: "/list", 
-    detail: "/detail", 
-    edit: "/edit"
-}
-
 const client = axios.create({
     baseURL: "http://localhost/api",
-    timeout: 1000 // 设置超时时间,单位毫秒
+    timeout: 10000 // 设置超时时间,单位毫秒
 });
 
-export const Get = (url) => {
-    return client.get(urls[url])
+export const GetList = () => {
+    return client.get("/code/list")
 }
 
-export const Post = (url, data) => {
-    return client.post(urls[url], data)
+export const GetOne = (id) => {
+    // 模板字符串
+    let url = `/codes/${id}`
+    return client.get(url)
+}
+
+export const PostData = (data) => {
+    return client.post("/code/add", data)
+}
+
+export const PostLogin = (data) => {
+    return client.post("/user/login", data)
 }

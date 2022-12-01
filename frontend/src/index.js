@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import './index.css';
+import './css/index.css';
 import {Detail} from "./components/Detail";
 import {Login} from "./components/Login";
 import {RequireAuth} from "./components/RequireAuth";
 import {List} from "./components/List";
 import {Edit} from "./components/Edit";
 import {Navigation} from "./components/Navigation";
+import {Create} from "./components/Create";
 
 let root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,8 +16,9 @@ root.render(
             <Route path="/" element={<Index/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/list" element={<List/>}/>
-            <Route path="/detail" element={<RequireAuth><Detail/></RequireAuth>}/>
+            <Route path="/detail/:id" element={<RequireAuth><Detail/></RequireAuth>}/>
             <Route path="/edit" element={<RequireAuth><Edit/></RequireAuth>}/>
+            <Route path="/create" element={<RequireAuth><Create/></RequireAuth>}/>
         </Routes>
         
     </BrowserRouter>

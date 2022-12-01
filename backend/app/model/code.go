@@ -19,6 +19,12 @@ func GetCodeList() []Code {
 	return codes
 }
 
+func GetCodeById(id int) Code {
+	var code Code
+	db.Find(&code, id)
+	return code
+}
+
 func AddCode(code *Code) {
 	db.Create(code)
 }

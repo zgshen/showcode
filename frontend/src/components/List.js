@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Get} from "../services/Service";
+import {GetList} from "../services/Service";
 import {Navigation} from "./Navigation";
 import {useNavigate} from "react-router-dom";
+import ReactMarkdown from 'react-markdown'
 
 export function List() {
 
@@ -9,7 +10,7 @@ export function List() {
     const navigate = useNavigate();
     
     useEffect(() => {
-        Get("list").then((response) => {
+        GetList().then((response) => {
             const dto = response.data.map((item) => ({
                 "id": item.id,
                 "title": item.title,
@@ -30,8 +31,7 @@ export function List() {
     }, [])
     
     const handleDetail = (e, id) => {
-        console.log(id)
-        navigate('/detail?id='+id)
+        navigate('/detail/'+id)
     }
     
     return (
@@ -52,8 +52,8 @@ export function List() {
                                                 <p className="leading-relaxed font-bold">
                                                     {res.title}
                                                 </p>
-                                                <p className="leading-relaxed text-gray-700">
-                                                    {res.content}
+                                                <p className="leading-relaxed text-gray-700 truncate md:overflow-clip">
+                                                    <ReactMarkdown>{res.content}</ReactMarkdown>
                                                 </p>
                                             </blockquote>
 

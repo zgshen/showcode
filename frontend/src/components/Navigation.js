@@ -19,7 +19,10 @@ export const Navigation = () => {
                     >
                         <a className="text-gray-500" href="/">ShowCode</a>
                         {auth.getUser() && (
-                            <a className="text-gray-500" href="/list">List</a>
+                        <a className="text-gray-500" href="/list">List</a>
+                        )}
+                        {auth.getUser() && (
+                        <a className="text-gray-500" href="/create">Create</a>
                         )}
                     </nav>
 

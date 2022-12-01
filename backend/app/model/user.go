@@ -15,10 +15,12 @@ func (User) TableName() string {
 func Select(id int) User {
 	var user User
 	db.Raw("select * from sc_user where id=?", id).Scan(&user)
+	return user
+}
 
-	if user == (User{}) {
-
-	}
+func SelectUser(username string, password string) User {
+	var user User
+	db.Raw("select * from sc_user where username=? and password=?", username, password).Scan(&user)
 	return user
 }
 

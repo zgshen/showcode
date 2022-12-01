@@ -10,6 +10,11 @@ func Get(id int) model.User {
 	return user
 }
 
+func GetUser(username string, password string) model.User {
+	user := model.SelectUser(username, password)
+	return user
+}
+
 func GetList() []model.User {
 	return model.SelectAll()
 }
