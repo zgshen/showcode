@@ -3,7 +3,6 @@ COPY . /app/backend
 
 ENV GO111MODULE=on
 ENV GOPROXY="https://goproxy.cn"
-RUN go mod download
 
 RUN cd /app/backend && go build main.go
 
