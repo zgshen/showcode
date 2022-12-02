@@ -1,0 +1,21 @@
+
+/*
+https://github.com/sindresorhus/github-markdown-css
+*/
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
+}
+
+ol, ul, menu {
+    list-style: disc;
+    margin: 0;
+    padding: 0;
+}
