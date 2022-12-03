@@ -7,7 +7,7 @@ services:
     volumes:
       - type: bind
         source: /opt/sqlite/data.db
-        target: /app/backend/config/data.db 
+        target: /opt/sqlite/data.db 
     ports:
       - "8080:8080"
   
@@ -17,5 +17,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "12880:12880"
-      
+    depends_on:
+      - server
+    links:
+      - server 
     

@@ -12,4 +12,4 @@ name = "showcode"
 port = ":8080"
 
 [database]
-path = "config/data.db"
+path = "/opt/sqlite/data.db"
