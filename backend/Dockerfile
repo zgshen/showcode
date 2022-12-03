@@ -1,10 +1,12 @@
 FROM golang:1.18.2
-COPY . /app/backend
+WORKDIR . /app/backend
+COPY . .
 
 ENV GO111MODULE=on
 ENV GOPROXY="https://goproxy.cn"
 
-RUN cd /app/backend && go build main.go
+RUN go mod download
+RUN go build main.go
 
 EXPOSE 8080
 ENTRYPOINT  ["./main"]
