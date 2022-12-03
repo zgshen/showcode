@@ -1,7 +1,7 @@
 import React from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {AuthProvider} from "./Auth";
-import {PostData, PostLogin} from "../services/Service";
+import {PostLogin} from "../services/Service";
 
 export const Login = () => {
     const auth = AuthProvider()

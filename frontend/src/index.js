@@ -32,7 +32,7 @@ function Index() {
                 <article className="group w-1/3 mx-auto">
                     <img
                         alt="Lava"
-                        src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGNvZGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                        src="code.avif"
                         className="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
                     />
     

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-    baseURL: "http://localhost/api",
+    baseURL: "http://localhost:12880/api",
     timeout: 10000 // 设置超时时间,单位毫秒
 });
 
